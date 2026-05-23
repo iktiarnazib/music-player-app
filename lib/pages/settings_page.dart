@@ -35,8 +35,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           //switch for darkmode or light mode
           Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-            padding: const EdgeInsets.all(20.0),
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding: EdgeInsets.all(5),
             child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               tileColor: Theme.of(context).colorScheme.secondary,
               title: Text('Dark Mode'),
               trailing: Switch.adaptive(
