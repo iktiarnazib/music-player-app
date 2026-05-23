@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:musicapp/components/my_drawer.dart';
 import 'package:musicapp/models/playlist_provider.dart';
+import 'package:musicapp/pages/song_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -24,7 +25,14 @@ class _HomePageState extends ConsumerState<HomePage> {
           return ListTile(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SongPage()),
+              MaterialPageRoute(
+                builder: (context) => SongPage(
+                  songName: songs[index].songName,
+                  artistName: songs[index].artistName,
+                  albumArtImagePath: songs[index].albumArtImagePath,
+                  audioPath: songs[index].audioPath,
+                ),
+              ),
             ),
             title: Text(songs[index].songName),
             subtitle: Text(songs[index].artistName),
