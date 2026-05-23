@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/components/my_back_button.dart';
 import 'package:musicapp/components/neu_box.dart';
 
 class SongPage extends StatelessWidget {
@@ -18,7 +19,39 @@ class SongPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Column(children: []),
+      body: Column(
+        children: [
+          //appbar
+          SafeArea(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //back button
+                MyBackButton(onTap: () => Navigator.pop(context)),
+                //page title
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'S O N G S  P A G E',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+
+                //menu button
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(Icons.menu),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
