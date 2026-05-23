@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/components/my_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,11 +7,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home Page'), centerTitle: true),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(title: Text('P L A Y L I S T'), centerTitle: true),
       body: Column(children: [
 
         ],
       ),
+      drawer: MyDrawer(),
     );
   }
 }
