@@ -27,7 +27,11 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     final isDark = ref.read(themeProvider) == darkMode;
     return Scaffold(
       appBar: AppBar(
-        title: Text('S E T T I N G S', overflow: TextOverflow.ellipsis),
+        title: Text(
+          'S E T T I N G S',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -44,7 +48,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Dark Mode'),
+                Text(
+                  'Dark Mode',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
                 Switch.adaptive(
                   value: isDark,
                   onChanged: (value) => themeToggle(isDark),
