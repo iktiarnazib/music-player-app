@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicapp/components/neu_box.dart';
 
 class SongPage extends StatelessWidget {
   final String songName;
@@ -15,6 +16,9 @@ class SongPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Column(children: []),
+    );
   }
 }
