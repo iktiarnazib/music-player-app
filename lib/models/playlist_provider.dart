@@ -28,4 +28,16 @@ class PlaylistNotifier extends _$PlaylistNotifier {
       ),
     };
   }
+
+  //current index
+  int? currentIndex = 0;
+
+  //setting and notifying for new index
+  void setNewIndex(int newIndex) {
+    //setting new index
+    currentIndex = newIndex;
+
+    //notify provider
+    ref.notifyListeners();
+  }
 }
