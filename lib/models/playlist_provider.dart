@@ -9,7 +9,7 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   Set<Song> build() {
     return {
       Song(
-        songName: 'love me not',
+        songName: 'Love Me Not',
         artistName: 'Ravyn Lenae',
         albumArtImagePath: 'assets/images/lovemenot.jpg',
         audioPath: 'assets/audio/lovemenot.mp3',
