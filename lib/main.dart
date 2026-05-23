@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:musicapp/pages/home_page.dart';
+import 'package:musicapp/pages/settings_page.dart';
 import 'package:musicapp/themes/theme_provider.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeMode,
+      routes: {'settings': (context) => const SettingsPage()},
       home: HomePage(),
     );
   }

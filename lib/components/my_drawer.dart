@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:musicapp/components/my_drawer_tile.dart';
+import 'package:musicapp/pages/settings_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
-  void onSettings() {}
+  void onSettings(BuildContext context) {
+    //pop the drawer
+    Navigator.pop(context);
+    //Navigate to settings page
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class MyDrawer extends StatelessWidget {
           MyDrawerTile(
             title: 'S E T T I N G S',
             icon: Icons.settings,
-            onTap: () => onSettings(),
+            onTap: () => onSettings(context),
           ),
         ],
       ),
