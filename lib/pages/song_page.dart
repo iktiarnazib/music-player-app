@@ -104,12 +104,52 @@ class SongPage extends StatelessWidget {
                 ),
                 //song and artist name and icon
               ),
+              const SizedBox(height: 25),
+
+              //song duration box
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //start time
+                        Text('0:00'),
+
+                        //shuffle icon
+                        Icon(Icons.shuffle),
+
+                        //repeat icon
+                        Icon(Icons.repeat),
+
+                        //end time
+                        Text('3:00'),
+                      ],
+
+                      //slider
+                    ),
+                  ),
+                  //song duration progress
+                  //slider
+                  SliderTheme(
+                    data: SliderTheme.of(
+                      context,
+                    ).copyWith(thumbShape: SliderComponentShape.noThumb),
+                    child: Slider(
+                      min: 0,
+                      max: 100,
+                      value: 50,
+                      activeColor: Colors.green,
+                      onChanged: (value) {},
+                    ),
+                  ),
+                ],
+              ),
+
+              //playback controls
             ],
           ),
-
-          //song duration box
-
-          //playback controls
         ],
       ),
     );
