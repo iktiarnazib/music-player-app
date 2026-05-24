@@ -60,49 +60,52 @@ class SongPage extends StatelessWidget {
 
             children: [
               //artwork
-              NeuBox(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    //art work
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(albumArtImagePath),
-                    ),
-                    //song and artist name
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //song name and artist
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  songName,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: NeuBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      //art work
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(albumArtImagePath),
+                      ),
+                      //song and artist name
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //song name and artist
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    songName,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(artistName),
-                              ],
+                                  Text(artistName),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
 
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.favorite_border),
-                        ),
-                      ],
-                    ),
-                  ],
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.favorite_border),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  //song and artist name and icon
                 ),
-                //song and artist name and icon
               ),
               const SizedBox(height: 25),
 
@@ -146,8 +149,21 @@ class SongPage extends StatelessWidget {
                   ),
                 ],
               ),
-
+              const SizedBox(height: 25),
               //playback controls
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  children: [
+                    //skip previous
+                    Expanded(child: NeuBox(child: Icon(Icons.skip_previous))),
+                    //play / pause
+                    Expanded(child: NeuBox(child: Icon(Icons.play_arrow))),
+                    //skip forward
+                    Expanded(child: NeuBox(child: Icon(Icons.skip_next))),
+                  ],
+                ),
+              ),
             ],
           ),
         ],
