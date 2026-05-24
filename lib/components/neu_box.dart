@@ -15,14 +15,14 @@ class NeuBox extends StatelessWidget {
           BoxShadow(
             color: Theme.of(context).colorScheme.secondary,
             blurRadius: 15,
-            offset: Offset(4, 4),
+            offset: Offset(4, 4), //bottom right
           ),
 
           //lighter shadow bottom left
           BoxShadow(
             color: Theme.of(context).colorScheme.tertiary,
             blurRadius: 15,
-            offset: Offset(-4, -4),
+            offset: Offset(-4, -4), //bottom left
           ),
         ],
       ),
