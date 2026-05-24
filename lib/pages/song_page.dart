@@ -54,6 +54,56 @@ class SongPage extends StatelessWidget {
             ),
           ),
           //album artwork
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+
+            children: [
+              //artwork
+              NeuBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //art work
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(albumArtImagePath),
+                    ),
+                    //song and artist name
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //song name and artist
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  songName,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(artistName),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        IconButton(
+                          onPressed: () => Spacer(),
+                          icon: Icon(Icons.favorite_border),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                //song and artist name and icon
+              ),
+            ],
+          ),
 
           //song duration box
 
