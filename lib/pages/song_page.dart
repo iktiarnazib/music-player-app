@@ -55,116 +55,134 @@ class SongPage extends StatelessWidget {
             ),
           ),
           //album artwork
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-
-            children: [
-              //artwork
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: NeuBox(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      //art work
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(albumArtImagePath),
-                      ),
-                      //song and artist name
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          //song name and artist
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    songName,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //artwork
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: NeuBox(
+                    onTap: null,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //art work
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(albumArtImagePath),
+                        ),
+                        //song and artist name
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //song name and artist
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      songName,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(artistName),
-                                ],
+                                    Text(artistName),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.favorite_border),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    //song and artist name and icon
+                  ),
+                ),
+                const SizedBox(height: 25),
 
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.favorite_border),
-                          ),
+                //song duration box
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //start time
+                          Text('0:00'),
+
+                          //shuffle icon
+                          Icon(Icons.shuffle),
+
+                          //repeat icon
+                          Icon(Icons.repeat),
+
+                          //end time
+                          Text('3:00'),
                         ],
+
+                        //slider
+                      ),
+                    ),
+                    //song duration progress
+                    //slider
+                    SliderTheme(
+                      data: SliderTheme.of(
+                        context,
+                      ).copyWith(thumbShape: SliderComponentShape.noThumb),
+                      child: Slider(
+                        min: 0,
+                        max: 100,
+                        value: 50,
+                        activeColor: Colors.green,
+                        onChanged: (value) {},
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                //playback controls
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      //skip previous
+                      Expanded(
+                        child: NeuBox(
+                          onTap: () {},
+                          child: Icon(Icons.skip_previous),
+                        ),
+                      ),
+                      //play / pause
+                      Expanded(
+                        flex: 2,
+                        child: NeuBox(
+                          onTap: () {},
+                          child: Icon(Icons.play_arrow),
+                        ),
+                      ),
+                      //skip forward
+                      Expanded(
+                        child: NeuBox(
+                          onTap: () {},
+                          child: Icon(Icons.skip_next),
+                        ),
                       ),
                     ],
                   ),
-                  //song and artist name and icon
                 ),
-              ),
-              const SizedBox(height: 25),
-
-              //song duration box
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //start time
-                        Text('0:00'),
-
-                        //shuffle icon
-                        Icon(Icons.shuffle),
-
-                        //repeat icon
-                        Icon(Icons.repeat),
-
-                        //end time
-                        Text('3:00'),
-                      ],
-
-                      //slider
-                    ),
-                  ),
-                  //song duration progress
-                  //slider
-                  SliderTheme(
-                    data: SliderTheme.of(
-                      context,
-                    ).copyWith(thumbShape: SliderComponentShape.noThumb),
-                    child: Slider(
-                      min: 0,
-                      max: 100,
-                      value: 50,
-                      activeColor: Colors.green,
-                      onChanged: (value) {},
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 25),
-              //playback controls
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    //skip previous
-                    Expanded(child: NeuBox(child: Icon(Icons.skip_previous))),
-                    //play / pause
-                    Expanded(child: NeuBox(child: Icon(Icons.play_arrow))),
-                    //skip forward
-                    Expanded(child: NeuBox(child: Icon(Icons.skip_next))),
-                  ],
-                ),
-              ),
-            ],
+                SizedBox(height: 30),
+              ],
+            ),
           ),
         ],
       ),
