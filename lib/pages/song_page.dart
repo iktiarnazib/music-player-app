@@ -23,6 +23,7 @@ class SongPage extends StatelessWidget {
         children: [
           //appbar
           SafeArea(
+            bottom: false,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -73,9 +74,9 @@ class SongPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //song name and artist
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Expanded(
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -85,6 +86,7 @@ class SongPage extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(artistName),
                               ],
@@ -93,7 +95,7 @@ class SongPage extends StatelessWidget {
                         ),
 
                         IconButton(
-                          onPressed: () => Spacer(),
+                          onPressed: () {},
                           icon: Icon(Icons.favorite_border),
                         ),
                       ],
