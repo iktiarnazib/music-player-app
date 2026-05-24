@@ -7,22 +7,23 @@ class NeuBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
-          //darker shadow bottom right
+          //bottom right shadow
           BoxShadow(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.primary,
             blurRadius: 15,
             offset: Offset(4, 4), //bottom right
           ),
 
-          //lighter shadow bottom left
+          //top left shadow
           BoxShadow(
             color: Theme.of(context).colorScheme.tertiary,
             blurRadius: 15,
-            offset: Offset(-4, -4), //bottom left
+            offset: Offset(-4, -4), //top left
           ),
         ],
       ),
