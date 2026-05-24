@@ -43,13 +43,21 @@ class SongPage extends StatelessWidget {
                 ),
 
                 //menu button
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(Icons.menu),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: Icon(Icons.menu),
+                  ),
                 ),
               ],
             ),
           ),
+          //album artwork
+
+          //song duration box
+
+          //playback controls
         ],
       ),
     );
