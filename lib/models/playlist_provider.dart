@@ -7,9 +7,21 @@ part 'playlist_provider.g.dart';
 
 @riverpod
 class PlaylistNotifier extends _$PlaylistNotifier {
+  //guard to run it only once when initialized
+  bool _listenersRegistered = false;
   @override
   Set<Song> build() {
-    listenDuration(); //initiate listen duration in the beginning of every rebuild
+    //dispose when removed from memory
+    ref.onDispose(() {
+      _audioPlayer.dispose();
+    });
+
+    //after first run '_listenersRegistered' becomes false
+    if (!_listenersRegistered) {
+      _listenersRegistered =
+          true; //making it false so it doesn't run again using true.
+      listenDuration();
+    }
     return {
       Song(
         songName: 'Love Me Not',
@@ -70,7 +82,7 @@ class PlaylistNotifier extends _$PlaylistNotifier {
 
   //pause
   Future<void> pause() async {
-    await _audioPlayer.stop();
+    await _audioPlayer.pause();
     isPlaying = false;
     ref.notifyListeners();
   }
@@ -97,7 +109,7 @@ class PlaylistNotifier extends _$PlaylistNotifier {
       return;
     }
     currentIndex = (currentIndex! < song.length - 1) ? currentIndex! + 1 : 0;
-    ref.notifyListeners();
+
     await play();
   }
 
@@ -114,7 +126,7 @@ class PlaylistNotifier extends _$PlaylistNotifier {
     }
 
     currentIndex = (currentIndex! > 0) ? (currentIndex! - 1) : state.length - 1;
-    ref.notifyListeners();
+
     await play();
   }
 
