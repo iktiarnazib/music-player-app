@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/rendering.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'song.dart';
 
@@ -13,19 +14,19 @@ class PlaylistNotifier extends _$PlaylistNotifier {
         songName: 'Love Me Not',
         artistName: 'Ravyn Lenae',
         albumArtImagePath: 'assets/images/lovemenot.jpg',
-        audioPath: 'assets/audio/lovemenot.mp3',
+        audioPath: 'audio/lovemenot.mp3',
       ),
       Song(
         songName: "Look On Down From The Bridge",
         artistName: "Mazzy Star",
         albumArtImagePath: 'assets/images/lookondown.jpg',
-        audioPath: 'assets/audio/lookondown.mp3',
+        audioPath: 'audio/lookondown.mp3',
       ),
       Song(
         songName: "Dracula",
         artistName: "Tame Impala",
         albumArtImagePath: 'assets/images/dracula.jpg',
-        audioPath: 'assets/audio/dracula.mp3',
+        audioPath: 'audio/dracula.mp3',
       ),
     };
   }
@@ -33,51 +34,51 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   //current index
   int? currentIndex = 0;
 
-  //A U D I O P L A Y E R
+  //setting new current Index
+  void setCurrentIndex(int index) {
+    currentIndex = index;
+    debugPrint("$currentIndex");
+  }
 
-  //Audio player
+  //audio player
   final AudioPlayer _audioPlayer = AudioPlayer();
 
-  //duration
+  //Durations
   Duration currentDuration = Duration.zero;
   Duration totalDuration = Duration.zero;
 
-  //constructor
-
-  //initially not playing
+  //playback state
   bool isPlaying = false;
 
-  //play the song
-  void play() async {}
+  //play
+  Future<void> play() async {
+    //set the songs to list
+    final song = state.toList();
 
-  //pause current song
+    if (currentIndex == null || song.isEmpty) {
+      debugPrint('There is error in play method');
+      return;
+    }
 
-  //play or pause
-
-  //seek a specific position in the current song
-
-  //play next song
-
-  //play previous song
-
-  //listen to duration
-  void listenToDuration() {
-    //listen for total duration
-    _audioPlayer.onDurationChanged.listen((newduration) {
-      totalDuration = newduration;
-      ref.notifyListeners();
-    });
-
-    //listen for current duration
-    _audioPlayer.onPositionChanged.listen((newPosition) {
-      currentDuration = newPosition;
-    });
-
-    //listen for song completion
-    _audioPlayer.onPlayerComplete.listen((event) {});
-
-    //notifying provider
+    await _audioPlayer.stop();
+    await _audioPlayer.play(AssetSource(song[currentIndex!].audioPath));
+    isPlaying = true;
+    ref.notifyListeners();
   }
 
-  //dispose audio player
+  //pause
+  Future<void> pause() async {
+    await _audioPlayer.stop();
+    isPlaying = false;
+    ref.notifyListeners();
+  }
+
+  //play or pause
+  Future<void> playOrPause() async {
+    if (isPlaying) {
+      await pause();
+    } else {
+      await play();
+    }
+  }
 }

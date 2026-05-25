@@ -24,12 +24,12 @@ class _HomePageState extends ConsumerState<HomePage> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             onTap: () {
+              ref.read(playlistProvider.notifier).setCurrentIndex(index);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SongPage()),
               );
             },
-
             title: Text(songs[index].songName),
             subtitle: Text(songs[index].artistName),
             leading: Image.asset(
