@@ -38,6 +38,7 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   void setCurrentIndex(int index) {
     currentIndex = index;
     debugPrint("$currentIndex");
+    ref.notifyListeners();
   }
 
   //audio player
@@ -80,5 +81,22 @@ class PlaylistNotifier extends _$PlaylistNotifier {
     } else {
       await play();
     }
+  }
+
+  //seek position
+  Future<void> seek(Duration position) async {
+    await _audioPlayer.seek(position);
+  }
+
+  //play next
+  Future<void> playNext() async {
+    final song = state.toList();
+    if (currentIndex == null) {
+      debugPrint('Current index in null');
+      return;
+    }
+    currentIndex = (currentIndex! < song.length) ? currentIndex! + 1 : 0;
+    ref.notifyListeners();
+    await play();
   }
 }
