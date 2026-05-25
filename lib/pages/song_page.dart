@@ -3,17 +3,7 @@ import 'package:musicapp/components/my_back_button.dart';
 import 'package:musicapp/components/neu_box.dart';
 
 class SongPage extends StatelessWidget {
-  final String songName;
-  final String artistName;
-  final String albumArtImagePath;
-  final String audioPath;
-  const SongPage({
-    super.key,
-    required this.songName,
-    required this.artistName,
-    required this.albumArtImagePath,
-    required this.audioPath,
-  });
+  const SongPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +60,7 @@ class SongPage extends StatelessWidget {
                         //art work
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(albumArtImagePath),
+                          child: Text('Image'),
                         ),
                         //song and artist name
                         Row(
@@ -84,14 +74,14 @@ class SongPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      songName,
+                                      "songName",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    Text(artistName),
+                                    Text("artistName"),
                                   ],
                                 ),
                               ),

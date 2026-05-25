@@ -23,17 +23,13 @@ class _HomePageState extends ConsumerState<HomePage> {
         itemCount: songs.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SongPage(
-                  songName: songs[index].songName,
-                  artistName: songs[index].artistName,
-                  albumArtImagePath: songs[index].albumArtImagePath,
-                  audioPath: songs[index].audioPath,
-                ),
-              ),
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SongPage()),
+              );
+            },
+
             title: Text(songs[index].songName),
             subtitle: Text(songs[index].artistName),
             leading: Image.asset(
