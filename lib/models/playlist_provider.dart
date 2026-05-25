@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'song.dart';
 
@@ -32,12 +33,51 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   //current index
   int? currentIndex = 0;
 
-  //setting and notifying for new index
-  void setNewIndex(int newIndex) {
-    //setting new index
-    currentIndex = newIndex;
+  //A U D I O P L A Y E R
 
-    //notify provider
-    ref.notifyListeners();
+  //Audio player
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  //duration
+  Duration currentDuration = Duration.zero;
+  Duration totalDuration = Duration.zero;
+
+  //constructor
+
+  //initially not playing
+  bool isPlaying = false;
+
+  //play the song
+  void play() async {}
+
+  //pause current song
+
+  //play or pause
+
+  //seek a specific position in the current song
+
+  //play next song
+
+  //play previous song
+
+  //listen to duration
+  void listenToDuration() {
+    //listen for total duration
+    _audioPlayer.onDurationChanged.listen((newduration) {
+      totalDuration = newduration;
+      ref.notifyListeners();
+    });
+
+    //listen for current duration
+    _audioPlayer.onPositionChanged.listen((newPosition) {
+      currentDuration = newPosition;
+    });
+
+    //listen for song completion
+    _audioPlayer.onPlayerComplete.listen((event) {});
+
+    //notifying provider
   }
+
+  //dispose audio player
 }
