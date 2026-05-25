@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:musicapp/components/my_back_button.dart';
 import 'package:musicapp/components/neu_box.dart';
+import 'package:musicapp/models/playlist_provider.dart';
 
-class SongPage extends StatelessWidget {
+class SongPage extends ConsumerWidget {
   const SongPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref.read(playlistProvider.notifier).currentIndex;
+    final list = ref.read(playlistProvider).toList;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
@@ -60,7 +64,7 @@ class SongPage extends StatelessWidget {
                         //art work
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Text('Image'),
+                          child: Text("list[index]."),
                         ),
                         //song and artist name
                         Row(
