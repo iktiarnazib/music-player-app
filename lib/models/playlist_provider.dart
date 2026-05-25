@@ -95,7 +95,23 @@ class PlaylistNotifier extends _$PlaylistNotifier {
       debugPrint('Current index in null');
       return;
     }
-    currentIndex = (currentIndex! < song.length) ? currentIndex! + 1 : 0;
+    currentIndex = (currentIndex! < song.length - 1) ? currentIndex! + 1 : 0;
+    ref.notifyListeners();
+    await play();
+  }
+
+  //play previous song
+  Future<void> playPrevious() async {
+    if (currentDuration.inSeconds > 2) {
+      await seek(Duration.zero);
+    }
+
+    if (currentIndex == null) {
+      debugPrint('Current index is currently null');
+      return;
+    }
+
+    currentIndex = (currentIndex! > 0) ? (currentIndex! - 1) : state.length - 1;
     ref.notifyListeners();
     await play();
   }
