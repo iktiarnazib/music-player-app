@@ -9,6 +9,7 @@ part 'playlist_provider.g.dart';
 class PlaylistNotifier extends _$PlaylistNotifier {
   @override
   Set<Song> build() {
+    listenDuration(); //initiate listen duration in the beginning of every rebuild
     return {
       Song(
         songName: 'Love Me Not',
@@ -104,6 +105,7 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   Future<void> playPrevious() async {
     if (currentDuration.inSeconds > 2) {
       await seek(Duration.zero);
+      return;
     }
 
     if (currentIndex == null) {
@@ -114,5 +116,23 @@ class PlaylistNotifier extends _$PlaylistNotifier {
     currentIndex = (currentIndex! > 0) ? (currentIndex! - 1) : state.length - 1;
     ref.notifyListeners();
     await play();
+  }
+
+  //listen to duration (private, called once in build)
+
+  void listenDuration() {
+    _audioPlayer.onDurationChanged.listen((newDuration) {
+      totalDuration = newDuration; //set new songs duration.
+      ref.notifyListeners();
+    });
+
+    _audioPlayer.onPositionChanged.listen((newPosition) {
+      currentDuration = newPosition; //set new position changed duration.
+      ref.notifyListeners();
+    });
+
+    _audioPlayer.onPlayerComplete.listen((_) {
+      playNext(); //on end play next song.
+    });
   }
 }
