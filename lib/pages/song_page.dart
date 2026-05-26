@@ -7,10 +7,18 @@ import 'package:musicapp/models/playlist_provider.dart';
 class SongPage extends ConsumerWidget {
   const SongPage({super.key});
 
+  String _formatDuration(Duration duration) {
+    final minute = duration.inMinutes;
+    final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
+    return "$minute:$seconds";
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.read(playlistProvider.notifier).currentIndex;
-    final list = ref.read(playlistProvider).toList;
+    final notifier = ref.watch(playlistProvider.notifier);
+    final songs = ref.watch(playlistProvider).toList();
+    final currentSong = songs[notifier.currentIndex!];
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
@@ -64,7 +72,7 @@ class SongPage extends ConsumerWidget {
                         //art work
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Text("list[index]."),
+                          child: Image.asset(currentSong.albumArtImagePath),
                         ),
                         //song and artist name
                         Row(
@@ -78,14 +86,14 @@ class SongPage extends ConsumerWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "songName",
+                                      currentSong.songName,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    Text("artistName"),
+                                    Text(currentSong.artistName),
                                   ],
                                 ),
                               ),
@@ -112,7 +120,7 @@ class SongPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           //start time
-                          Text('0:00'),
+                          Text(_formatDuration(notifier.currentDuration)),
 
                           //shuffle icon
                           Icon(Icons.shuffle),
@@ -121,7 +129,7 @@ class SongPage extends ConsumerWidget {
                           Icon(Icons.repeat),
 
                           //end time
-                          Text('3:00'),
+                          Text(_formatDuration(notifier.totalDuration)),
                         ],
 
                         //slider
