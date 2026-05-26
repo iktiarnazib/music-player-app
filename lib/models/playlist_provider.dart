@@ -11,10 +11,10 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   bool _listenersRegistered = false;
   @override
   Set<Song> build() {
-    //dispose when removed from memory
-    ref.onDispose(() {
-      _audioPlayer.dispose();
-    });
+    // //dispose when removed from memory
+    // ref.onDispose(() {
+    //   _audioPlayer.dispose();
+    // });
 
     //after first run '_listenersRegistered' becomes false
     if (!_listenersRegistered) {
@@ -48,10 +48,10 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   int? currentIndex = 0;
 
   //setting new current Index
-  void setCurrentIndex(int index) {
+  void setCurrentIndex(int index) async {
     currentIndex = index;
     debugPrint("$currentIndex");
-    ref.notifyListeners();
+    await play();
   }
 
   //audio player

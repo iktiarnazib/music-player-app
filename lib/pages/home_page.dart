@@ -14,7 +14,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final songs = ref.read(playlistProvider).toList();
+    final songs = ref.watch(playlistProvider).toList();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(title: Text('P L A Y L I S T'), centerTitle: true),
@@ -24,11 +24,11 @@ class _HomePageState extends ConsumerState<HomePage> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             onTap: () {
-              ref.watch(playlistProvider.notifier).setCurrentIndex(index);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SongPage()),
               );
+              ref.read(playlistProvider.notifier).setCurrentIndex(index);
             },
             title: Text(songs[index].songName),
             subtitle: Text(songs[index].artistName),

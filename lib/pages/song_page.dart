@@ -15,7 +15,8 @@ class SongPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(playlistProvider.notifier);
+    ref.watch(playlistProvider);
+    final notifier = ref.read(playlistProvider.notifier);
     final songs = ref.watch(playlistProvider).toList();
     final currentSong = songs[notifier.currentIndex!];
 
