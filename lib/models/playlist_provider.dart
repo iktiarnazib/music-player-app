@@ -11,10 +11,10 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   bool _listenersRegistered = false;
   @override
   Set<Song> build() {
-    // //dispose when removed from memory
-    // ref.onDispose(() {
-    //   _audioPlayer.dispose();
-    // });
+    //dispose when removed from memory
+    ref.onDispose(() {
+      _audioPlayer.dispose();
+    });
 
     //after first run '_listenersRegistered' becomes false
     if (!_listenersRegistered) {
@@ -64,7 +64,9 @@ class PlaylistNotifier extends _$PlaylistNotifier {
   //playback state
   bool isPlaying = false;
 
-  //play
+  //
+  //current playing path
+  String? currentPlayingPath;
   Future<void> play() async {
     //set the songs to list
     final song = state.toList();
@@ -73,9 +75,15 @@ class PlaylistNotifier extends _$PlaylistNotifier {
       debugPrint('There is error in play method');
       return;
     }
+    final newPath = song[currentIndex!].audioPath;
 
-    await _audioPlayer.stop();
-    await _audioPlayer.play(AssetSource(song[currentIndex!].audioPath));
+    if (currentPlayingPath != newPath) {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(AssetSource(newPath));
+      currentPlayingPath = newPath;
+    } else {
+      await _audioPlayer.resume();
+    }
     isPlaying = true;
     ref.notifyListeners();
   }
