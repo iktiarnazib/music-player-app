@@ -143,10 +143,20 @@ class SongPage extends ConsumerWidget {
                       ).copyWith(thumbShape: SliderComponentShape.noThumb),
                       child: Slider(
                         min: 0,
-                        max: 100,
-                        value: 50,
+                        max: notifier.totalDuration.inSeconds.toDouble().clamp(
+                          1,
+                          double.infinity,
+                        ),
+                        value: notifier.currentDuration.inSeconds
+                            .toDouble()
+                            .clamp(
+                              0,
+                              notifier.totalDuration.inSeconds.toDouble(),
+                            ),
                         activeColor: Colors.green,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          notifier.seek(Duration(seconds: value.toInt()));
+                        },
                       ),
                     ),
                   ],
