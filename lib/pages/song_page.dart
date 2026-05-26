@@ -170,7 +170,9 @@ class SongPage extends ConsumerWidget {
                       //skip previous
                       Expanded(
                         child: NeuBox(
-                          onTap: () {},
+                          onTap: () {
+                            notifier.playPrevious();
+                          },
                           child: Icon(Icons.skip_previous),
                         ),
                       ),
@@ -178,14 +180,20 @@ class SongPage extends ConsumerWidget {
                       Expanded(
                         flex: 2,
                         child: NeuBox(
-                          onTap: () {},
-                          child: Icon(Icons.play_arrow),
+                          onTap: () {
+                            notifier.playOrPause();
+                          },
+                          child: Icon(
+                            notifier.isPlaying ? Icons.pause : Icons.play_arrow,
+                          ),
                         ),
                       ),
                       //skip forward
                       Expanded(
                         child: NeuBox(
-                          onTap: () {},
+                          onTap: () {
+                            notifier.playNext();
+                          },
                           child: Icon(Icons.skip_next),
                         ),
                       ),
